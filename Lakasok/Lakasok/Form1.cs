@@ -24,6 +24,7 @@ namespace Lakasok
         {
             InitializeComponent();
             LoadData();
+            CreateExcel();
         }
         private void LoadData()
         {
@@ -44,7 +45,7 @@ namespace Lakasok
                 xlSheet = xlWB.ActiveSheet;
 
                 // Tábla létrehozása
-               // CreateTable();
+                CreateTable();
 
                 // Control átadása a felhasználónak
                 xlApp.Visible = true;
