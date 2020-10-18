@@ -107,6 +107,26 @@ namespace Lakasok
              GetCell(2, 1),
              GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
 
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range TableRange = xlSheet.get_Range(GetCell(2, 1), GetCell(counter + 1, headers.Length));
+            TableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range FirstColRange = xlSheet.get_Range(GetCell(2, 1), GetCell(counter + 1, 1));
+            FirstColRange.Interior.Color = Color.LightYellow;
+            FirstColRange.Font.Bold = true;
+
+            Excel.Range LastColRange = xlSheet.get_Range(GetCell(2, headers.Length), GetCell(counter + 1, headers.Length));
+            LastColRange.Interior.Color = Color.LightGreen;
+            LastColRange.NumberFormat = "0.00";
+
         }
         private string GetCell(int x, int y)
         {
