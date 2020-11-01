@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using wwek06.Entities;
 using wwek06.MnbServiceReference;
 
 namespace wwek06
 {
     public partial class Form1 : Form
     {
+        BindingList<RateDate> Rates = new BindingList<RateDate>();
         public Form1()
         {
             InitializeComponent();
             GetExchangeRates();
+            dataGridView1.DataSource = Rates;
         }
 
         private void GetExchangeRates()
