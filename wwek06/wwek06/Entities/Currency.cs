@@ -8,6 +8,6 @@ namespace wwek06.Entities
 {
     class Currency
     {
-        public string Currency { get; set; }
+        public string CValue { get; set; }
     }
 }

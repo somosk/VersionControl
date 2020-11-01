@@ -60,7 +60,7 @@ namespace wwek06
                 var childElement = (XmlElement)element.ChildNodes[0];
                 if (childElement == null)
                     continue;
-                currency.Currency = childElement.GetAttribute("curr");
+                currency.CValue = childElement.GetAttribute("curr");
 
 
                
