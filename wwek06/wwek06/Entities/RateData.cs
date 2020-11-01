@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace wwek06.Entities
 {
-    class RateDate
+    class RateData
     {
         public DateTime Date { get; set; }
         public  string Currency { get; set; }

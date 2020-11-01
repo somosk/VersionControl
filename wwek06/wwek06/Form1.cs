@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using wwek06.Entities;
 using wwek06.MnbServiceReference;
 
@@ -14,12 +15,35 @@ namespace wwek06
 {
     public partial class Form1 : Form
     {
-        BindingList<RateDate> Rates = new BindingList<RateDate>();
+        BindingList<RateData> Rates = new BindingList<RateData>();
         public Form1()
         {
             InitializeComponent();
             GetExchangeRates();
             dataGridView1.DataSource = Rates;
+            CreateXml();
+        }
+
+        private void CreateXml()
+        {
+            var xml = new XmlDocument();
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+               
+                var rate = new RateData();
+                Rates.Add(rate);
+
+               rate.Date = DateTime.Parse(element.GetAttribute("date"));
+
+                var childElement = (XmlElement)element.ChildNodes[0];
+                rate.Currency = childElement.GetAttribute("curr");
+
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                    rate.Value = value / unit;
+            }
+
         }
 
         private void GetExchangeRates()
