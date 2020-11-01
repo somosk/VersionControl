@@ -17,19 +17,82 @@ namespace wwek06
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<Currency> Currencies = new BindingList<Currency>();
+        
         public Form1()
         {
             InitializeComponent();
+            GetCurrencies();
+            LoadCurrencies();
             RefreshData();
+        }
+
+        private void LoadCurrencies()
+        {
+           
+        }
+
+        private void GetCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            var request = new GetCurrenciesRequestBody()
+            {
+
+                
+            };
+
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+
+
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                // Létrehozzuk az adatsort és rögtön hozzáadjuk a listához
+                // Mivel ez egy referencia típusú változó, megtehetjük, hogy előbb adjuk a listához és csak később töltjük fel a tulajdonságait
+                var currency = new Currency();
+               
+                Currencies.Add(currency);
+
+                var childElement = (XmlElement)element.ChildNodes[0];
+                if (childElement == null)
+                    continue;
+                currency.Currency = childElement.GetAttribute("curr");
+
+
+               
+            }
         }
 
         private void RefreshData()
         {
             Rates.Clear();
-            GetExchangeRates();
+            CallWebservice();
+            comboBox1.DataSource = Currencies;
             dataGridView1.DataSource = Rates;
             CreateXml();
             ShowData();
+        }
+
+        private static void CallWebservice()
+        {
+        
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetExchangeRatesRequestBody()
+            {
+                currencyNames = "EUR",
+                startDate = "2020-01-01",
+                endDate = "2020-06-30"
+            };
+
+            var response = mnbService.GetExchangeRates(request);
+
+         
+            var result = response.GetExchangeRatesResult;
         }
 
         private void ShowData()
@@ -63,6 +126,8 @@ namespace wwek06
                rate.Date = DateTime.Parse(element.GetAttribute("date"));
 
                 var childElement = (XmlElement)element.ChildNodes[0];
+                if (childElement == null)
+                    continue;
                 rate.Currency = childElement.GetAttribute("curr");
 
                 var unit = decimal.Parse(childElement.GetAttribute("unit"));
@@ -73,20 +138,9 @@ namespace wwek06
 
         }
 
-        private void GetExchangeRates()
+        private void Webservice()
         {
-            var mnbService = new MNBArfolyamServiceSoapClient();
-
-            var request = new GetExchangeRatesRequestBody()
-            {
-                currencyNames = comboBox1.SelectedValue.ToString(),
-                startDate = dateTimePicker1.Value.ToString(),
-                endDate = dateTimePicker2.Value.ToString()
-            };
-
-            var response = mnbService.GetExchangeRates(request);
-
-            var result = response.GetExchangeRatesResult;
+           
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
