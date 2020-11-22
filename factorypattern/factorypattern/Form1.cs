@@ -15,23 +15,36 @@ namespace factorypattern
     public partial class Form1 : Form
     {
         private List<Toy> _toys = new List<Toy>();
-        private IToyFactory _itoyfactory;
-        public IToyFactory IToyFactory
+        private Toy _nextToy;
+        private IToyFactory _factory;
+        public IToyFactory Factory
         {
-            get { return _itoyfactory; }
-            set { _itoyfactory = value; }
+            get { return _factory; }
+            set { _factory = value;
+                DisplayNext();
+            }
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+                Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = lblNext.Top + lblNext.Height + 20;
+            _nextToy.Left = lblNext.Left;
+            Controls.Add(_nextToy); ;
         }
 
         public Form1()
         {
             InitializeComponent();
             mainPanel.Width = this.Width;
-            IToyFactory = new BallFactory();
+            Factory = new BallFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            var toy = IToyFactory.CreateNew();
+            var toy = Factory.CreateNew();
             _toys.Add(toy);
             toy.Left = -toy.Width;
             mainPanel.Controls.Add(toy);
@@ -55,6 +68,27 @@ namespace factorypattern
                 _toys.Remove(oldestToy);
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+                return;
+            button.BackColor = colorPicker.Color;
         }
     }
 }
