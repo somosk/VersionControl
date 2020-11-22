@@ -79,7 +79,7 @@ namespace factorypattern
         {
             Factory = new BallFactory
             {
-                BallColor = btnBallColor.BackColor
+                BallColor = button1.BackColor
             };
         }
 
