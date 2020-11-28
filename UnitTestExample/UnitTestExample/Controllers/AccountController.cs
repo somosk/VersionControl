@@ -50,7 +50,31 @@ namespace UnitTestExample.Controllers
 
         public bool ValidatePassword(string password)
         {
-            return true;
+            var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
+
+            bool containsInt = password.Any(char.IsDigit);
+            if (regexItem.IsMatch(password))
+            {
+                if (password.Length < 9)
+                {
+                    return false;
+                }
+                else if (password.ToUpper() == password)
+                {
+                    return false;
+                }
+                else if (password.ToLower() == password)
+                {
+                    return false;
+                }
+                else if (!containsInt)
+                {
+                    return false;
+                }
+                else return true;
+            }
+            else return false;
+
         }
     }
 }
