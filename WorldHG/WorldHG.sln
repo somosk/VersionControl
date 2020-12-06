@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldHardestGame", "WorldHardestGame\WorldHardestGame.csproj", "{42294964-7B99-4D52-B754-BAE504F972A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldHG", "WorldHG\WorldHG.csproj", "{C60D28EC-1CC5-4D20-98C1-336904C2247A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{42294964-7B99-4D52-B754-BAE504F972A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42294964-7B99-4D52-B754-BAE504F972A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42294964-7B99-4D52-B754-BAE504F972A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42294964-7B99-4D52-B754-BAE504F972A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C60D28EC-1CC5-4D20-98C1-336904C2247A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C60D28EC-1CC5-4D20-98C1-336904C2247A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C60D28EC-1CC5-4D20-98C1-336904C2247A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C60D28EC-1CC5-4D20-98C1-336904C2247A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9C1687FF-57AE-4E5A-B90E-133B3D5FA058}
+		SolutionGuid = {8E94768E-95A9-4F18-B336-74EFFF2AD49E}
 	EndGlobalSection
 EndGlobal
