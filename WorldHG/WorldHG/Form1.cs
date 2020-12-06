@@ -34,5 +34,12 @@ namespace WorldHG
             }
             gc.Start();
         }
+        private void Gc_GameOver(object sender)
+        {
+            generation++;
+            label1.Text = string.Format(
+                "{0}. generáció",
+                generation);
+        }
     }
 }
